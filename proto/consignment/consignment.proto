@@ -19,11 +19,18 @@ message Container {
     string user_id = 4;
 }
 
-message Response {
+message GetRequest {}
+
+message CreateResponse {
     bool created = 1;
     Consignment consignment = 2;
 }
 
+message GetResponse {
+    repeated Consignment consignments = 1;
+}
+
 service ShippingService {
-    rpc CreateConsignment(Consignment) returns (Response) {}
+    rpc CreateConsignment (Consignment) returns (CreateResponse) {}
+    rpc GetConsignments (GetRequest) returns (GetResponse) {}
 }
